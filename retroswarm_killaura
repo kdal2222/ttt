@@ -1,0 +1,42 @@
+local Players = game:GetService("Players")
+local plr = Players.LocalPlayer
+
+function missing(t, f, fallback)
+	if type(f) == t then return f end
+	return fallback
+end
+
+function getRoot(char)
+	local rootPart = char:FindFirstChild('HumanoidRootPart') or char:FindFirstChild('Torso') or char:FindFirstChild('UpperTorso')
+	return rootPart
+end
+
+firetouchinterest = missing("function", firetouchinterest)
+
+local z = function(speaker)
+	if not firetouchinterest then
+		return "Wrong exploit"
+	end
+	if not speaker.Character then return end
+	local tool = speaker.Character:FindFirstChildWhichIsA("Tool")
+	local handle = tool and tool:FindFirstChild("Handle")
+	if not handle then
+		return "No tool"
+	end
+	local range = math.huge
+
+	while task.wait() and speaker.Character and tool.Parent and tool.Parent == speaker.Character do
+		for _, monster in workspace:WaitForChild('Monsters') do
+			local hum = monster.Character:FindFirstChildWhichIsA("Humanoid")
+			local root = hum and getRoot(monster.Character)
+
+			if root and hum.Health > 0 and hum:GetState() ~= Enum.HumanoidStateType.Dead and speaker:DistanceFromCharacter(root.Position) <= range then
+				firetouchinterest(handle, root, 1)
+				firetouchinterest(handle, root, 0)
+			end
+			break
+		end
+	end
+end
+
+print(z(plr))
