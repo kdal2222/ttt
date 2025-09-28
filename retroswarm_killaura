@@ -25,7 +25,7 @@ local z = function(speaker)
 	end
 	local range = math.huge
 
-	while task.wait() and speaker.Character and tool.Parent and tool.Parent == speaker.Character do
+	while true and speaker.Character and tool.Parent and tool.Parent == speaker.Character do
 		for _, monster in ipairs(workspace:WaitForChild('Monsters'):GetChildren()) do
 			local hum = monster.Character:FindFirstChildWhichIsA("Humanoid")
 			local root = hum and getRoot(monster.Character)
@@ -34,8 +34,9 @@ local z = function(speaker)
 				firetouchinterest(handle, root, 1)
 				firetouchinterest(handle, root, 0)
 			end
-			break
+			wait()
 		end
+		wait()
 	end
 end
 
