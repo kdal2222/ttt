@@ -26,7 +26,7 @@ local z = function(speaker)
 	local range = math.huge
 
 	while task.wait() and speaker.Character and tool.Parent and tool.Parent == speaker.Character do
-		for _, monster in workspace:WaitForChild('Monsters') do
+		for _, monster in workspace:WaitForChild('Monsters'):GetChildren() do
 			local hum = monster.Character:FindFirstChildWhichIsA("Humanoid")
 			local root = hum and getRoot(monster.Character)
 
