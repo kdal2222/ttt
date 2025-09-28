@@ -1,0 +1,6 @@
+local Players = game:GetService("Players")
+local locl_plr = Players.LocalPlayer
+
+local head = locl_plr.Character:WaitForChild("Head")
+
+workspace.RetroEvent.RetroChallengePortal.Trigger.CFrame = head.CFrame
